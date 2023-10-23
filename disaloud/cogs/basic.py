@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import logging
+from logging import getLogger
 from typing import cast
 
 import discord
@@ -9,6 +9,8 @@ from discord.ext.commands import Context
 
 from ..bot import Bot
 from .tts import TTS
+
+logger = getLogger(__name__)
 
 
 class Basic(commands.Cog):
@@ -22,7 +24,7 @@ class Basic(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         if self.bot.user:
-            logging.info(
+            logger.info(
                 "Logged in as %s (ID: %d)", self.bot.user.name, self.bot.user.id
             )
 
@@ -31,7 +33,6 @@ class Basic(commands.Cog):
         if ret:
             await ctx.message.add_reaction("✅")
         else:
-            await ctx.reply("VCに接続してから呼んでください")
             await ctx.message.add_reaction("❌")
 
     @commands.command()
@@ -44,7 +45,7 @@ class Basic(commands.Cog):
 
     @commands.command()
     async def bye(self, ctx: Context) -> None:
-        await self.tts.leave()
+        await self.tts.leave(ctx)
         await ctx.message.add_reaction("✅")
 
     @commands.Cog.listener()
@@ -89,7 +90,7 @@ class Basic(commands.Cog):
             and before.channel
             and len(before.channel.members) == 1
         ):
-            await self.tts.leave()
+            await self.tts.leave(None)
 
 
 async def setup(bot: Bot):
