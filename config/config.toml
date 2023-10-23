@@ -1,0 +1,6 @@
+token = ""
+input_device = "CABLE Output MME"
+
+[bouyomichan]
+host = "localhost"
+port = 50080

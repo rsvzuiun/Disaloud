@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "disaloud"
+version = "0.1.0"
+description = ""
+authors = []
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+discord-py = { extras = ["voice"], version = "^2.3.2" }
+sounddevice = "^0.4.6"
+pydantic = "^2.4.2"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+black = "*"
+ruff = "*"
+ipython = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
