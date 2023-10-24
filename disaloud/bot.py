@@ -12,3 +12,7 @@ class Bot(commands.Bot):
     async def setup_hook(self) -> None:
         for ext in self.exts:
             await self.load_extension(ext, package=__package__)
+
+    async def reload(self) -> None:
+        for ext in self.exts:
+            await self.reload_extension(ext, package=__package__)

@@ -1,5 +1,6 @@
 token = ""
 input_device = "CABLE Output MME"
+use_global_pipe = true
 
 [bouyomichan]
 host = "localhost"

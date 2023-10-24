@@ -18,12 +18,12 @@ class PCMStream(discord.AudioSource):
         self.frames = int(self.stream.samplerate / 50)
         self.stream.start()
 
-    def __del__(self):
-        self.stream.close()
-
     def read(self):
         if not self.stream:
             return
 
         data = self.stream.read(self.frames)[0]  # type: ignore
         return bytes(data)  # type: ignore
+
+    def cleanup(self) -> None:
+        self.stream.close()

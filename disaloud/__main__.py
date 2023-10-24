@@ -14,10 +14,13 @@ async def main():
     intents = discord.Intents.default()
     intents.message_content = True
 
+    if not conf.use_global_pipe:
+        raise NotImplementedError()
+
     presence = discord.Game("unchi!")
     exts = [
-        ".cogs.tts",
         ".cogs.basic",
+        ".cogs.tts.global_pipe",
     ]
     async with Bot(
         command_prefix=commands.when_mentioned_or(),

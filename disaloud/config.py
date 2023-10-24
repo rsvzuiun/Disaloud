@@ -19,6 +19,7 @@ class BouyomiChan:
 class Config:
     token: str
     input_device: str
+    use_global_pipe: bool
     bouyomichan: BouyomiChan
 
 
