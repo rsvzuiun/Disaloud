@@ -2,13 +2,17 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from logging import getLogger
+from typing import TYPE_CHECKING
 
 import discord
 from discord.ext import commands
-from discord.ext.commands import Context
 
-from ...bot import Bot
-from ...util import result_reaction, user_name
+from disaloud.util import result_reaction, user_name
+
+if TYPE_CHECKING:
+    from discord.ext.commands import Context
+
+    from disaloud.bot import Bot
 
 logger = getLogger(__name__)
 chatlogger = getLogger(f'{__package__.split(".")[0]}.chat')

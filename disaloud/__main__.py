@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 import asyncio
 import logging
 
 import discord
 from discord.ext import commands
 
-from . import Bot, load_config, setup_logging
+from disaloud import Bot, load_config, setup_logging
 
 
 async def main():

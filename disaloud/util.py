@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import discord
-from discord.ext import commands
+
+if TYPE_CHECKING:
+    from discord.ext import commands
 
 
 def user_name(user: discord.User | discord.Member) -> str:
@@ -20,5 +24,5 @@ def get_voice_channel(ctx: commands.Context) -> discord.member.VocalGuildChannel
     return None
 
 
-async def result_reaction(ctx: commands.Context, result: bool):
+async def result_reaction(ctx: commands.Context, result: bool):  # noqa: FBT001
     await ctx.message.add_reaction("❌✅"[result])

@@ -3,17 +3,20 @@
 from __future__ import annotations
 
 from logging import getLogger
-from typing import Self, cast
+from typing import TYPE_CHECKING, Self, cast
 
 import aiohttp
 import discord
 from discord.ext import commands
-from discord.ext.commands import Context
 
-from ...audio import PCMStream
-from ...bot import Bot
-from ...util import get_voice_channel
-from .base import TTSBase
+from disaloud.audio import PCMStream
+from disaloud.cogs.tts.base import TTSBase
+from disaloud.util import get_voice_channel
+
+if TYPE_CHECKING:
+    from discord.ext.commands import Context
+
+    from disaloud.bot import Bot
 
 logger = getLogger(__name__)
 
@@ -85,7 +88,7 @@ class TTSGlobalPipe(TTSBase, name="TTS"):
             async with self.session.get(url) as response:
                 await response.text()
         except (TimeoutError, aiohttp.ClientConnectionError):
-            logger.exception("棒読みちゃんが起動していないよ！")
+            logger.exception("棒読みちゃんが起動していないよ!")
 
     async def _add_text_channel(self, ctx: Context):
         self.text_channels.add(ctx.channel)

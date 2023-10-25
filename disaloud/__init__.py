@@ -1,4 +1,3 @@
-# ruff: noqa: F401
-from .bot import Bot
-from .config import load_config
-from .logger import setup_logging
+from disaloud.bot import Bot
+from disaloud.config import load_config
+from disaloud.logger import setup_logging

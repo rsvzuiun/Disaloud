@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from logging import getLogger
+from typing import TYPE_CHECKING
 
 from discord.ext import commands
-from discord.ext.commands import Context
 
-from ..bot import Bot
-from ..util import result_reaction
+from disaloud.util import result_reaction
+
+if TYPE_CHECKING:
+    from discord.ext.commands import Context
+
+    from disaloud.bot import Bot
 
 logger = getLogger(__name__)
 
