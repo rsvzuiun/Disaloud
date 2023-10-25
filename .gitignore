@@ -1,11 +1,11 @@
 # pj
-config/*
-!config/config.toml
+develop.toml
 log/*
 !log/.gitkeep
 
 # vscode
-.vscode/
+.vscode/**/*
+!.vscode/launch.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

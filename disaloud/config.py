@@ -24,8 +24,8 @@ class Config:
 
 
 def load_config() -> Config:
-    if not (fp := Path("./config/develop.toml")).exists():
-        fp = Path("./config/config.toml")
+    if not (fp := Path("./develop.toml")).exists():
+        fp = Path("./config.toml")
     with fp.open("rb") as f:
         obj = tomllib.load(f)
     return pydantic.TypeAdapter(Config).validate_python(obj)

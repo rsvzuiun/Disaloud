@@ -11,6 +11,7 @@ from ...bot import Bot
 from ...util import result_reaction, user_name
 
 logger = getLogger(__name__)
+chatlogger = getLogger(f'{__package__.split(".")[0]}.chat')
 
 
 class TTSBase(commands.Cog):
@@ -76,10 +77,15 @@ class TTSBase(commands.Cog):
             return
 
         # TODO プラグイン化
-        if is_target := self.is_target(message):
-            text = f"{user_name(message.author)} {message.clean_content}"
+        if is_target := (
+            self.is_target(message) and not message.clean_content.startswith("~~")
+        ):
+            if message.clean_content.startswith("--"):
+                text = message.clean_content.removeprefix("--")
+            else:
+                text = f"{user_name(message.author)} {message.clean_content}"
             await self._talk(text)
-        logger.info(
+        chatlogger.info(
             "%s %s/%s: %s",
             "⛔✅"[is_target],
             message.guild and message.guild.name,

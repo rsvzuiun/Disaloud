@@ -5,8 +5,8 @@ from __future__ import annotations
 from logging import getLogger
 from typing import Self, cast
 
+import aiohttp
 import discord
-import requests
 from discord.ext import commands
 from discord.ext.commands import Context
 
@@ -24,6 +24,8 @@ class TTSGlobalPipe(TTSBase, name="TTS"):
         self.text_channels: set[discord.abc.MessageableChannel] = set()
         self.audio: PCMStream | None = None
         self.voice_client: discord.VoiceClient | None = None
+        # TODO 設定ファイルにするかな?
+        self.session = aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(1))
 
     @staticmethod
     def is_current_guild():
@@ -78,8 +80,12 @@ class TTSGlobalPipe(TTSBase, name="TTS"):
 
     async def _talk(self, text: str):
         b = self.bot.config.bouyomichan
-        # NOTE aiohttp はクエリをエンコードして棒読みちゃんがしぬ
-        requests.get(f"http://{b.host}:{b.port}/talk?text={text}")
+        url = f'http://{b.host}:{b.port}/talk?text={text.replace(" ", "%20")}'
+        try:
+            async with self.session.get(url) as response:
+                await response.text()
+        except (TimeoutError, aiohttp.ClientConnectionError):
+            logger.exception("棒読みちゃんが起動していないよ！")
 
     async def _add_text_channel(self, ctx: Context):
         self.text_channels.add(ctx.channel)

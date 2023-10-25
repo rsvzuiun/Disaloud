@@ -1,4 +1,4 @@
-token = ""
+token = "<ここにDiscord BOTのトークンを入力する>"
 input_device = "CABLE Output MME"
 use_global_pipe = true
 

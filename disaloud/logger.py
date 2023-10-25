@@ -15,6 +15,7 @@ def setup_logging(
     for name, lvl in other_levels.items():
         logging.getLogger(name).setLevel(lvl)
 
+    Path("./log/").mkdir(parents=True, exist_ok=True)
     file = logging.handlers.TimedRotatingFileHandler(
         filename=Path("./log/app.log"),
         when="midnight",
