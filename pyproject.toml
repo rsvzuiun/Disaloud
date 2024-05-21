@@ -12,7 +12,7 @@ python = "^3.11"
 discord-py = { extras = ["voice"], version = "^2.3.2" }
 sounddevice = "^0.4.6"
 pydantic = "^2.4.2"
-requests = "^2.31.0"
+requests = "^2.32.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
